@@ -37,7 +37,7 @@ attempt_endpoints(Endpoints, Data, Call) ->
     Strategy = wh_json:get_binary_value(<<"strategy">>, Data, ?DIAL_METHOD_SIMUL),
     Ringback = wh_json:get_value(<<"ringback">>, Data),
     lager:info("attempting ring group of ~b members with strategy ~s", [length(Endpoints), Strategy]),
-    case whapps_call_command:b_bridge(Endpoints, Timeout, Strategy, <<"true">>, Ringback, Call) of
+    case whapps_call_command:b_bridge(Endpoints, Timeout, Strategy, <<"true">>, Ringback, <<"true">>, Call) of
         {'ok', _} ->
             lager:info("completed successful bridge to the ring group - call finished normally"),
             cf_exe:stop(Call);
